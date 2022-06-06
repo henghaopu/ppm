@@ -3,6 +3,8 @@ module.exports = {
     browser: true,
     es2021: true,
     node: true,
+    // reference: https://stackoverflow.com/questions/55807824/describe-is-not-defined-when-installing-jest
+    jest: true,
   },
   extends: [
     'eslint:recommended',
@@ -11,6 +13,11 @@ module.exports = {
     // reference: https://stackoverflow.com/questions/57962620/how-to-setup-self-closing-when-i-save-code-on-vscode-with-prettier-and-eslint
     'airbnb',
     'airbnb/hooks',
+    // after installing eslint-plugin-jest-dom, add the plugin here allows eslint in .test.ts to detect linting error and autofix them
+    'plugin:jest-dom/recommended',
+    // https://stackoverflow.com/questions/61825296/eslint-plugin-testing-library-is-not-catching-lint-errors
+    'plugin:testing-library/react',
+
     // reference: https://blog.devgenius.io/eslint-prettier-typescript-and-react-in-2022-e5021ebca2b1
     'prettier',
   ],
@@ -25,11 +32,9 @@ module.exports = {
   plugins: [
     'react',
     '@typescript-eslint',
-    // cra has eslint-plugin-jest-dom and eslint-plugin-testing-library, so we can just enable them
     'jest-dom',
-    'plugin:jest-dom/recommended',
-    'plugin:testing-library/recommended',
-    'plugin:testing-library/react',
+    // cra has eslint-plugin-testing-library, so we can just enable it
+    'testing-library',
   ],
   rules: {
     'react/jsx-filename-extension': [
