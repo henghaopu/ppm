@@ -58,11 +58,11 @@ const isAnagram = (s: string, t: string): boolean => {
 
 // fun fp way
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const areAnagrams = (s: string, t: string): boolean =>
+const areAnagramsFp = (s: string, t: string): boolean =>
   // const freqCounterS = R.countBy(R.identity, [...s])
   // const freqCounterS = R.countBy<string>(R.identity)([...s])
   // const freqCounterT = R.countBy<string>(R.identity)([...t])
   // return R.equals(freqCounterS, freqCounterT)
   R.equals(R.countBy(R.identity, [...s]), R.countBy(R.identity, [...t]))
 
-export default isAnagram
+export { isAnagram, areAnagramsFp }
