@@ -3,10 +3,13 @@ import R from 'ramda'
 /* eslint-disable no-restricted-syntax */
 
 /**
- * Given two strings s and t, return true if t is an anagram of s, and false otherwise.
-
-  An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
-
+ * Given two strings s and t, return true if t is an anagram of s, and false
+ * otherwise.
+ *
+ * An Anagram is a word or phrase formed by rearranging the letters of a
+ * different word or phrase, typically using all the original letters exactly
+ * once.
+ *
  * solution 1: sort
  * s = "anagram"    => aaamngr   O(nlogn)
  * t = "granmaa"    => aaamngr
@@ -19,14 +22,14 @@ import R from 'ramda'
  * for ... in mapsS and mapT to compare each property value
  *  - any difference -> return false
  *  - all same -> return true
- * 
+ *
  * solution 3: use fp's built-in frequency counter - R.countBy(R.identity)
  * reference: https://ramdajs.com/docs/#countBy
  * further study: https://stackoverflow.com/questions/71018098/how-to-calculate-relative-frequency-of-array-elements-using-ramda-js
- * 
+ *
  */
 
-const isAnagram = (s: string, t: string): boolean => {
+const areAnagrams = (s: string, t: string): boolean => {
   // early return an edge case
   if (s.length !== t.length) return false
 
@@ -65,4 +68,4 @@ const areAnagramsFp = (s: string, t: string): boolean =>
   // return R.equals(freqCounterS, freqCounterT)
   R.equals(R.countBy(R.identity, [...s]), R.countBy(R.identity, [...t]))
 
-export { isAnagram, areAnagramsFp }
+export { areAnagrams, areAnagramsFp }
