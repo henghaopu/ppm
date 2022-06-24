@@ -13,36 +13,41 @@
  *
  *    Tree structure:
  *
- *    ([],[A,B,C,D,E])
- *        ([A],[B,C,D,E])
- *            ([A,B],[C,D,E])  ([A,C], [D,E])  ([A,D], [E], ([A,E], [])
- *        ([B], [C,D,E])
- *            ([B,C],[D,E])  ([B,D],[E])  ([B,E], [])
- *        ([C], [D,E])
- *            ([C,D],[E])  ([C,E],[])
- *        ([D], [E])
- *            ([D,E],[])
- *        ([E], [])
+ *    ([A,B,C,D,E],[]):    loop through the candidate/rest items
+ *        ([B,C,D,E],[A]): Choose A, then loop through the rest items after A,
+ *        path 1: vertical
+ *            ([C,D,E],[A,B])  ([D,E],[A,C])  ([E],[A,D])  ([],[A,E])
+ *        path 2: horizontal
+ *        ([C,D,E],[B])  : pop out A. Choose B, then loop through items after B,
+ *            ([D,E],[B,C])  ([E],[B,D])  ([],[B,E])
+ *        ([D,E],[C])    : pop out B. Choose C, then loop through items after C,
+ *            ([E],[C,D])  ([],[C,E])
+ *        ([E],[D])      : pop out C. Choose D, then loop through items after D,
+ *            ([],[D,E])
+ *        ([],[E])       : pop out D. Choose E, then loop through items after E,
  *
+ *        ([],[])        : pop out E.
  */
 
 const combine = (nUniqueItems: unknown[], k: number): unknown[][] => {
   const output: unknown[][] = []
   // const nums = [...Array(n).fill(0).keys()].map((val) => val + 1)
 
-  function recursiveCombine(soFar: unknown[], rest: unknown[]) {
+  function recursiveCombine(rest: unknown[], soFar: unknown[]) {
     if (soFar.length === k) {
       output.push([...soFar])
-    } else {
-      for (let i = 0; i < rest.length; i += 1) {
-        soFar.push(rest[i])
-        recursiveCombine([...soFar], [...rest].slice(i + 1))
-        // backtracking pattern
-        soFar.pop()
-      }
+      return
+    }
+
+    for (let i = 0; i < rest.length; i += 1) {
+      soFar.push(rest[i])
+      recursiveCombine(rest.slice(i + 1), [...soFar])
+      // backtracking pattern
+      soFar.pop()
     }
   }
-  recursiveCombine([], nUniqueItems)
+
+  recursiveCombine(nUniqueItems, [])
   return output
 }
 
