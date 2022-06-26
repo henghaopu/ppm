@@ -30,7 +30,18 @@ function runningSum1(nums: number[]): number[] {
 }
 
 function runningSum2(nums: number[]): number[] {
-  return nums
+  // sumB4CurIdx = 0
+  // [1,2,3,4]
+  //  ↑           curIdx
+  const result: number[] = []
+  let sumB4Cur = 0
+
+  for (let curIdx = 0; curIdx < nums.length; curIdx += 1) {
+    const sumToCur = sumB4Cur + nums[curIdx]
+    result[curIdx] = sumToCur
+    sumB4Cur = sumToCur
+  }
+  return result
 }
 
 function runningSum3(nums: number[]): number[] {
