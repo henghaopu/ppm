@@ -30,7 +30,7 @@ function runningSum1(nums: number[]): number[] {
 }
 
 function runningSum2(nums: number[]): number[] {
-  // sumB4CurIdx = 0
+  // sumB4Cur = 0
   // [1,2,3,4]
   //  ↑           curIdx
   const result: number[] = []
@@ -64,7 +64,31 @@ function runningSum3(nums: number[]): number[] {
 }
 
 function runningSum4(nums: number[]): number[] {
-  return nums
+  // we call f(curIdx=0)
+  // f(curIdx=0) process and update the result, then it calls f(curIdx=1)
+  // f(curIdx=1) process and update the result, then it calls f(curIdx=2)
+  // ...
+  // until curIdx passes the last element idx
+
+  // closure
+  const mutableResult: number[] = []
+
+  function recursiveRunningSum(
+    numArr: number[],
+    curIdx: number,
+    sumB4Cur: number,
+  ): void {
+    // base case
+    if (curIdx === numArr.length) return
+
+    // recursive case
+    const sumToCur = numArr[curIdx] + sumB4Cur
+    mutableResult[curIdx] = sumToCur // or mutableResult.push(sumToCur)
+    recursiveRunningSum(numArr, curIdx + 1, sumToCur)
+  }
+
+  recursiveRunningSum(nums, 0, 0)
+  return mutableResult
 }
 
 export { runningSum1, runningSum2, runningSum3, runningSum4 }
