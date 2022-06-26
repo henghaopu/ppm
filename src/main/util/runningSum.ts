@@ -44,8 +44,23 @@ function runningSum2(nums: number[]): number[] {
   return result
 }
 
+type Acc = {
+  result: number[]
+  sumB4Cur: number
+}
+
 function runningSum3(nums: number[]): number[] {
-  return nums
+  // reduce from [1,2,3,4] to {result: [1,3,6,10], sumB4Cur: ..}
+  return nums.reduce(
+    (acc: Acc, cur: number): Acc => {
+      const sumToCur = acc.sumB4Cur + cur
+      return {
+        result: [...acc.result, sumToCur],
+        sumB4Cur: sumToCur,
+      }
+    },
+    { result: [], sumB4Cur: 0 },
+  ).result
 }
 
 function runningSum4(nums: number[]): number[] {
