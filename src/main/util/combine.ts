@@ -29,11 +29,11 @@
  *        ([],[])        : pop out E.
  */
 
-const combine = (nUniqueItems: unknown[], k: number): unknown[][] => {
-  const output: unknown[][] = []
+const combine = <T>(nUniqueItems: T[], k: number): T[][] => {
+  const output: T[][] = []
   // const nums = [...Array(n).fill(0).keys()].map((val) => val + 1)
 
-  function recursiveCombine(rest: unknown[], soFar: unknown[]) {
+  function recursiveCombine(rest: T[], soFar: T[]) {
     if (soFar.length === k) {
       output.push([...soFar])
       return
