@@ -4,7 +4,7 @@
  * complexity. If target exists, then return its index. Otherwise, return -1.
  *
  *
- *   [0, 1]   target 3
+ *   [0, 1]   target 2
  *    ↑  ↑    middle = floor((0 + 1) / 2) = 0
  *    ↑       start = middle ❌ (cause infinite loop)
  *       ↑    start = middle + 1 ✅
@@ -14,10 +14,10 @@ const binarySearch1 = (nums: number[], target: number): number => {
   let start = 0
   let end = nums.length - 1
 
-  // no need to let it be O(log 3n)
+  // no need to write additional code to check start and end - O(log 3n)
   // middle can cover start and end with the equal condition (start <= end)
-  // if (nums[start] === end) return start;
-  // if (nums[end] === end) return end;
+  // if (nums[start] === target) return start;
+  // if (nums[end] === target) return end;
 
   while (start <= end) {
     // if (nums[start] === target) return start;
@@ -42,10 +42,11 @@ const binarySearch2 = (nums: number[], target: number): number => {
     start: number,
     end: number,
   ): number {
+    // base case 1
     if (start > end) return -1
 
     const middle = Math.floor((start + end) / 2)
-
+    // base case 2
     if (numArray[middle] === aim) return middle
 
     // can replce if else with ternary
@@ -53,6 +54,8 @@ const binarySearch2 = (nums: number[], target: number): number => {
     //   return binarySearch(numArray, aim, middle + 1, end)
     // }
     // return binarySearch(numArray, aim, start, middle - 1)
+
+    // recursive case
     return numArray[middle] < aim
       ? binarySearch(numArray, aim, middle + 1, end)
       : binarySearch(numArray, aim, start, middle - 1)
