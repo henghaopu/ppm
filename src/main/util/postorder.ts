@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-use-before-define */
 
 /*
@@ -9,20 +10,26 @@
                                     return [5,6,2,3,4,1]
 
     f(): traverse function
-      - push val into output
-      - do nothing if node doesn't exist
-      - call itself with every child nodes
+      1. do nothing if node doesn't exist
+      2. call itself with every child nodes
+      3. push val into output
 
 */
 
 function postorder(root: TreeNode): number[] {
-  // step 2: define the output
   const output: number[] = []
-  // step 1: define the recursive function
-  function traverse(node: TreeNode) {}
-  // step 1: call the recursive function and pass in the first node
+
+  function traverse(node: TreeNode) {
+    if (!node) return
+
+    for (const child of node.children) {
+      traverse(child)
+    }
+    output.push(node.val)
+  }
+
   traverse(root)
-  // step 2: return the output
+
   return output
 }
 
