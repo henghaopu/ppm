@@ -1,4 +1,4 @@
-import { postorder, TreeNode } from 'main/util/postorder'
+import { postorder1, postorder2, TreeNode } from 'main/util/postorder'
 
 /**
                1→
@@ -20,5 +20,6 @@ test('the result is [5,6,2,3,4,1]', () => {
   node2.children.push(node5)
   node2.children.push(node6)
 
-  expect(postorder(node1)).toEqual([5, 6, 2, 3, 4, 1])
+  expect(postorder1(node1)).toEqual([5, 6, 2, 3, 4, 1])
+  expect(postorder2(node1)).toEqual([5, 6, 2, 3, 4, 1])
 })
