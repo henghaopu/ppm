@@ -47,6 +47,7 @@ function MinHeightDemo() {
             // use "flexGrow: 1" or "width: '100%'" when we want to occupy the rest of the horizontal space even if there's not enough content to fill up horizontally
             flexGrow: 1,
             // width: '100%',
+            // minWidth: 0,
             padding: '16px',
 
             display: 'flex',
@@ -59,47 +60,58 @@ function MinHeightDemo() {
               // use "flexGrow: 1" or "height: '100%'" when we want to occupy the rest of the vertical space even if there's not enough content to scroll vertically
               flexGrow: 1,
               // height: '100%',
-              border: '4px solid #Fe5c00',
+              border: '2px solid darkgray',
               // *** enable vertical scroll
               overflowY: 'auto',
+
+              // styles for its content
+              padding: '1rem',
+              display: 'grid',
+              // *** https://css-tricks.com/you-want-minmax10px-1fr-not-1fr/ card width is able to be smaller than min-content, and the ellipsis is able to show up in the card
+              gridTemplateColumns: 'repeat(5, minmax(10px, 1fr))',
+              gridTemplateRows: 'repeat(4, 1fr)',
+              rowGap: '1rem',
+              columnGap: '1rem',
             }}
           >
-            {[...Array(3).fill(0).keys()].map((item) => (
-              <div key={item} style={{ textAlign: 'left' }}>
-                <div style={{ paddingBottom: '16px' }}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                  sit amet eros suscipit, vehicula nibh ac, tincidunt neque. Ut
-                  condimentum in ante id semper. Curabitur vestibulum, tellus
-                  vel rhoncus egestas, enim justo elementum tellus, vel rutrum
-                  purus libero et felis. Nam cursus dolor vel pellentesque
-                  dapibus. Curabitur viverra cursus fermentum. Praesent posuere
-                  auctor suscipit. Phasellus mollis ligula sit amet tellus
-                  egestas luctus.
-                </div>
-                <div style={{ paddingBottom: '16px' }}>
-                  Phasellus ullamcorper sem a dolor consequat finibus. Praesent
-                  eu magna at diam tincidunt malesuada eget faucibus urna. Cras
-                  fermentum, tortor sed mollis pellentesque, mi risus convallis
-                  risus, non condimentum massa sem sit amet elit. Praesent
-                  consectetur ligula leo, sed venenatis lectus vulputate
-                  hendrerit. In hac habitasse platea dictumst. Aenean nulla
-                  ligula, porta id tortor nec, molestie sagittis ipsum. Sed
-                  pellentesque mauris sed lacus venenatis posuere. Vestibulum eu
-                  varius nisi. In in iaculis nibh, at molestie libero. Etiam
-                  eleifend semper erat commodo accumsan. Vivamus facilisis
-                  ornare metus, ac tempus elit mollis semper. Duis rutrum
-                  faucibus iaculis.
-                </div>
-                <div style={{ paddingBottom: '16px' }}>
-                  Sed at dui et leo ultrices sagittis ut ac quam. Vivamus
-                  consectetur mi in vestibulum auctor. Vestibulum ligula ex,
-                  pellentesque sit amet nulla ac, varius finibus felis. Praesent
-                  tellus tellus, pharetra ut augue in, semper feugiat odio.
-                  Maecenas condimentum sapien ut libero suscipit, eu luctus
-                  risus vulputate. Donec sodales, enim quis dictum ultricies,
-                  diam urna dapibus lacus, vel interdum felis leo sed justo.
-                  Vivamus nec dignissim felis, sit amet tristique lectus.
-                </div>
+            {[...Array(50).fill(0).keys()].map((item) => (
+              <div
+                key={item}
+                style={{
+                  border: '2px solid darkgray',
+
+                  // // no need
+                  // display: 'flex',
+                  // flexDirection: 'row',
+                }}
+              >
+                {/* data source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl */}
+                <dl
+                  style={{
+                    padding: '0.5rem',
+
+                    // // no need
+                    // flexGrow: 1,
+                    // minWidth: 0,
+                  }}
+                >
+                  <dt>Beast of Bodmin</dt>
+                  <dd
+                    style={{
+                      // https://css-tricks.com/flexbox-truncated-text/
+                      // https://yatil.net/blog/text-overflow-ellipsis-harmful
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
+                    A large feline inhabiting Bodmin Moor.
+                  </dd>
+                  <dt>Morgawr</dt>
+                  <dd>A sea serpent.</dd>
+                  <dt>Owlman</dt>
+                  <dd>A giant owl-like creature.</dd>
+                </dl>
               </div>
             ))}
           </div>
