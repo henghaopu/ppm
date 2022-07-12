@@ -47,6 +47,7 @@ function MinHeightDemo() {
             // use "flexGrow: 1" or "width: '100%'" when we want to occupy the rest of the horizontal space even if there's not enough content to fill up horizontally
             flexGrow: 1,
             // width: '100%',
+            // minWidth: 0,
             padding: '16px',
 
             display: 'flex',
@@ -63,10 +64,11 @@ function MinHeightDemo() {
               // *** enable vertical scroll
               overflowY: 'auto',
 
-              // style its content
+              // styles for its content
               padding: '1rem',
               display: 'grid',
-              gridTemplateColumns: 'repeat(5, 1fr)',
+              // *** https://css-tricks.com/you-want-minmax10px-1fr-not-1fr/ card width is able to be smaller than min-content, and the ellipsis is able to show up in the card
+              gridTemplateColumns: 'repeat(5, minmax(10px, 1fr))',
               gridTemplateRows: 'repeat(4, 1fr)',
               rowGap: '1rem',
               columnGap: '1rem',
@@ -76,14 +78,35 @@ function MinHeightDemo() {
               <div
                 key={item}
                 style={{
-                  textAlign: 'left',
                   border: '2px solid darkgray',
+
+                  // // no need
+                  // display: 'flex',
+                  // flexDirection: 'row',
                 }}
               >
                 {/* data source: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl */}
-                <dl style={{ padding: '0.5rem' }}>
+                <dl
+                  style={{
+                    padding: '0.5rem',
+
+                    // // no need
+                    // flexGrow: 1,
+                    // minWidth: 0,
+                  }}
+                >
                   <dt>Beast of Bodmin</dt>
-                  <dd>A large feline inhabiting Bodmin Moor.</dd>
+                  <dd
+                    style={{
+                      // https://css-tricks.com/flexbox-truncated-text/
+                      // https://yatil.net/blog/text-overflow-ellipsis-harmful
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
+                    A large feline inhabiting Bodmin Moor.
+                  </dd>
                   <dt>Morgawr</dt>
                   <dd>A sea serpent.</dd>
                   <dt>Owlman</dt>
