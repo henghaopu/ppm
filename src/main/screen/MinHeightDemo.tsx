@@ -1,6 +1,19 @@
 import React from 'react'
 
 function MinHeightDemo() {
+  const [isTooltipEnabled, setIsTooltipEnabled] = React.useState(false)
+
+  function handleMouseOver(
+    event: React.MouseEvent<HTMLElement> | React.FocusEvent<HTMLElement>,
+  ) {
+    const ddElement = event.target as HTMLElement
+    if (ddElement.scrollWidth > ddElement.clientWidth) {
+      setIsTooltipEnabled(true)
+    } else {
+      setIsTooltipEnabled(false)
+    }
+  }
+
   return (
     <div
       style={{
@@ -68,7 +81,7 @@ function MinHeightDemo() {
               padding: '1rem',
               display: 'grid',
               // *** https://css-tricks.com/you-want-minmax10px-1fr-not-1fr/ card width is able to be smaller than min-content, and the ellipsis is able to show up in the card
-              gridTemplateColumns: 'repeat(5, minmax(10px, 1fr))',
+              gridTemplateColumns: 'repeat(4, minmax(10px, 1fr))',
               gridTemplateRows: 'repeat(4, 1fr)',
               rowGap: '1rem',
               columnGap: '1rem',
@@ -104,6 +117,13 @@ function MinHeightDemo() {
                       whiteSpace: 'nowrap',
                       textOverflow: 'ellipsis',
                     }}
+                    title={
+                      isTooltipEnabled
+                        ? 'A large feline inhabiting Bodmin Moor.'
+                        : ''
+                    }
+                    onMouseOver={handleMouseOver}
+                    onFocus={handleMouseOver}
                   >
                     A large feline inhabiting Bodmin Moor.
                   </dd>
