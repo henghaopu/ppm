@@ -1,6 +1,6 @@
-# Getting Started with Create React App ![CI/CD](https://github.com/henghaopu/programming-notes/workflows/CI/CD/badge.svg)
+# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ![CI/CD](https://github.com/henghaopu/programming-notes/workflows/CI/CD/badge.svg)
 
 ## Available Scripts
 

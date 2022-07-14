@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo with default repo setup
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3
@@ -22,22 +22,22 @@ jobs:
           cache: 'npm'
 
       - name: Install npm packages
-      - run: npm ci
+        run: npm ci
 
       - name: Check types by running TypeScript complier
-      - run: npm run check-types
+        run: npm run check-types
 
       - name: Check code format by running Prettier
-      - run: npm run check-format
+        run: npm run check-format
 
       - name: Catch logical mistakes by running ESLint
-      - run: npm run lint
+        run: npm run lint
 
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo with default repo setup
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3
@@ -46,25 +46,25 @@ jobs:
           cache: 'npm'
 
       - name: Install npm packages
-      - run: npm ci
+        run: npm ci
 
       - name: Run tests using jest-junit reporter
-      - run: npm run test-report
+        run: npm run test-report
 
       - name: Publish test report
-      - uses: dorny/test-reporter@v1
-      if: success() || failure() 
-      with:
-        name: Test Report
-        path: reports/*.xml
-        reporter: jest-junit
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: Test Report
+          path: report/*.xml
+          reporter: jest-junit
 
-  build and deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     needs: [validate, test]
     steps:
       - name: Checkout repo with default repo setup
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3
@@ -73,10 +73,10 @@ jobs:
           cache: 'npm'
 
       - name: Install npm packages
-      - run: npm ci
+        run: npm ci
 
       - name: Create a production build directory
-      - run: npm run build
+        run: npm run build
 
       - name: Deploy to GitHub
         run: |
@@ -88,4 +88,4 @@ jobs:
           user_name: 'henghaopu'
           user_email: 'henghaopu@gmail.com'
           github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
-          repository: ${{ github.repository }} 
+          repository: ${{ github.repository }}
