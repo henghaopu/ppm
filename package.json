@@ -11,6 +11,7 @@
     "@types/ramda": "^0.28.14",
     "@types/react": "^18.0.11",
     "@types/react-dom": "^18.0.5",
+    "gh-pages": "^4.0.0",
     "jest-junit": "^14.0.0",
     "ramda": "^0.28.0",
     "react": "^18.1.0",
@@ -20,18 +21,20 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "check-types": "tsc",
     "prettier": "prettier --ignore-path .gitignore --check \"**/*.+(ts|tsx|css|json|js)\"",
     "check-format": "npm run prettier -- --check",
     "fix-format": "npm run prettier -- --write",
     "lint": "eslint --ignore-path .gitignore .",
     "validate": "npm run check-types && npm run check-format && npm run lint",
+    "test": "react-scripts test",
     "test-report": "npm run test -- --watchAll=false --reporters=default --reporters=jest-junit",
-    "test-coverage": "npm run test -- --coverage --watchAll=false --reporters=default --reporters=jest-junit --coverageReporters=cobertura"
+    "test-coverage": "npm run test -- --coverage --watchAll=false --reporters=default --reporters=jest-junit --coverageReporters=cobertura",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -64,5 +67,15 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "prettier": "2.6.2"
+  },
+  "homepage": "https://henghaopu.github.io/programming-notes",
+  "jest-junit": {
+    "outputDirectory": "report",
+    "outputName": "jest-junit.xml",
+    "ancestorSeparator": " › ",
+    "uniqueOutputName": "false",
+    "suiteNameTemplate": "{filepath}",
+    "classNameTemplate": "{classname}",
+    "titleTemplate": "{title}"
   }
 }
