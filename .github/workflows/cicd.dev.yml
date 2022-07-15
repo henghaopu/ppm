@@ -59,7 +59,7 @@ jobs:
           path: report/*.xml
           reporter: jest-junit
 
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     needs: [validate, test]
     steps:
@@ -77,6 +77,26 @@ jobs:
 
       - name: Create a production build directory
         run: npm run build
+
+      - name: Upload production build files as an artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact-${{ github.run_number }}
+          path: ./build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: dev
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifact-${{ github.run_number }}
+          path: ./build
 
       - name: Deploy to GitHub
         run: |
