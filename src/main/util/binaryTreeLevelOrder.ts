@@ -51,8 +51,36 @@ function binaryTreeLevelOrder1(root: TreeNode): number[][] {
   return output
 }
 
+/*
+  input:
+              1
+            /   \  
+          2      3
+        /  \   /  \
+       4    5  6   7
+
+  output: [[1],[2,3],[4,5,6,7]]
+
+
+
+*/
 function binaryTreeLevelOrder2(root: TreeNode): number[][] {
-  return [[root.val]]
+  const output: number[][] = []
+
+  function recursiveTraverse(node: TreeNode, level: number) {
+    // base case
+    if (!node) return
+
+    if (output[level]) output[level].push(node.val)
+    else output[level] = [node.val]
+
+    // doesn't actually need the if condition since we've had the base case
+    if (node.left) recursiveTraverse(node.left, level + 1)
+    if (node.right) recursiveTraverse(node.right, level + 1)
+  }
+  recursiveTraverse(root, 0)
+
+  return output
 }
 
 class TreeNode {

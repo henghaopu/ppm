@@ -23,4 +23,5 @@ test('return [[1], [2,3], [4,5]]', () => {
   node3.left = node4
   node3.right = node5
   expect(binaryTreeLevelOrder1(node1)).toEqual([[1], [2, 3], [4, 5]])
+  expect(binaryTreeLevelOrder2(node1)).toEqual([[1], [2, 3], [4, 5]])
 })
