@@ -54,6 +54,8 @@ module.exports = {
     // reference: https://typescript-eslint.io/rules/no-unused-vars/
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
+    'react/jsx-props-no-spreading': 'off',
+    'react/no-unstable-nested-components': ['off', { allowAsProps: true }],
   },
   // https://github.com/import-js/eslint-plugin-import/issues/1615
   settings: {
