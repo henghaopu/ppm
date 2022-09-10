@@ -37,6 +37,7 @@ module.exports = {
     'testing-library',
   ],
   rules: {
+    'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': [
       'warn',
       { extensions: ['tx', 'tsx', '.js'] },
