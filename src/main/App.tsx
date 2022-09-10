@@ -4,35 +4,14 @@ import ReactMarkdown from 'react-markdown'
 import raw from 'raw.macro'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import preval from 'preval.macro'
 
-// todo: get data(filenames) directly from a file
-const utilFileNames = [
-  'areAnagrams.ts',
-  'areIsomorphic.ts',
-  'binarySearch.ts',
-  'binaryTreeLevelOrder.ts',
-  'codePointAtInUPlusNotation.ts',
-  'combine.ts',
-  'fibonacci.ts',
-  'frequencySort.ts',
-  'getRandomInt.ts',
-  'hasCycle.ts',
-  'heap.ts',
-  'isPalindrome.ts',
-  'longestPalindrome.ts',
-  'mergeSortedLinkedLists.ts',
-  'middleNode.ts',
-  'permute.ts',
-  'pivotIndex.ts',
-  'postorder.ts',
-  'preorder.ts',
-  'queue.ts',
-  'removeElement.ts',
-  'reverseLinkedList.ts',
-  'rotate.ts',
-  'runningSum.ts',
-  'shuffle.ts',
-]
+// get data(filenames) directly from a directory
+const utilFileNames: string[] = preval`
+  const fs = require('fs')
+  const files = fs.readdirSync('src/main/util')
+  module.exports = files
+`
 
 function App() {
   return (
