@@ -32,10 +32,11 @@ const daisyUiThemes = [
   'night',
   'coffee',
   'winter',
-]
+] as const
 
 function NavBar() {
-  const [defaultTheme] = useState(() => {
+  // https://steveholgado.com/typescript-types-from-arrays/
+  const [defaultTheme] = useState<typeof daisyUiThemes[number]>(() => {
     const mql = window.matchMedia('(prefers-color-scheme: dark)')
     return mql.matches ? 'dark' : 'light'
   })

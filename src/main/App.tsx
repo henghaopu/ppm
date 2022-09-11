@@ -16,7 +16,10 @@ const utilFileNames: string[] = preval`
 `
 
 function App() {
-  const [codeTheme, setCodeTheme] = useState<string>('vscDarkPlus')
+  const [codeTheme, setCodeTheme] = useState<keyof typeof prismThemes>(() => {
+    const mql = window.matchMedia('(prefers-color-scheme: dark)')
+    return mql.matches ? 'vscDarkPlus' : 'materialOceanic'
+  })
   return (
     <div data-testid="app" className="h-screen w-screen flex flex-col">
       <NavBar />

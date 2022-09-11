@@ -3,8 +3,8 @@ import * as prismThemes from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 type DrawerProps = {
   utilFileNames: string[]
-  defaultCodeTheme: string
-  setCodeTheme: React.Dispatch<React.SetStateAction<string>>
+  defaultCodeTheme: keyof typeof prismThemes
+  setCodeTheme: React.Dispatch<React.SetStateAction<keyof typeof prismThemes>>
 }
 
 // todo: support mobile
@@ -21,7 +21,9 @@ function Drawer({
           <select
             className="select select-bordered select-xs w-20 grow m-1"
             defaultValue={defaultCodeTheme}
-            onChange={(e) => setCodeTheme(e.target.value)}
+            onChange={(e) =>
+              setCodeTheme(e.target.value as keyof typeof prismThemes)
+            }
           >
             {Object.keys(prismThemes).map((codeTheme) => (
               <option key={codeTheme} value={codeTheme}>
