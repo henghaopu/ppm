@@ -1,8 +1,9 @@
 // eslint-disable no-unstable-nested-components
+import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import raw from 'raw.macro'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import * as prismThemes from 'react-syntax-highlighter/dist/esm/styles/prism'
 import preval from 'preval.macro'
 import NavBar from './component/NavBar'
 import Drawer from './component/Drawer'
@@ -15,12 +16,17 @@ const utilFileNames: string[] = preval`
 `
 
 function App() {
+  const [codeTheme, setCodeTheme] = useState<string>('vscDarkPlus')
   return (
     <div data-testid="app" className="h-screen w-screen flex flex-col">
       <NavBar />
       <div className="grow flex flex-row min-h-0">
         {/* todo: use context */}
-        <Drawer utilFileNames={utilFileNames} />
+        <Drawer
+          utilFileNames={utilFileNames}
+          defaultCodeTheme={codeTheme}
+          setCodeTheme={setCodeTheme}
+        />
         <div className="flex flex-row flex-nowrap overflow-y-hidden scroll-smooth">
           {utilFileNames.map((utilFileName) => (
             // documentation: https://github.com/remarkjs/react-markdown
@@ -48,7 +54,10 @@ function App() {
                       {...props}
                       // typescript, jsx, ...
                       language={match[1]}
-                      style={vscDarkPlus}
+                      style={
+                        // reference: https://bobbyhadz.com/blog/typescript-element-implicitly-has-any-type-expression#:~:text=The%20error%20%22Element%20implicitly%20has,one%20of%20the%20object's%20keys.
+                        prismThemes[codeTheme as keyof typeof prismThemes]
+                      }
                       PreTag="div"
                       showLineNumbers
                       // two ways of overwriting default margin-y=0.5em

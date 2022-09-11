@@ -53,7 +53,7 @@ function NavBar() {
         <div className="flex items-stretch">
           <select
             data-choose-theme
-            className="select select-accent w-full max-w-xs"
+            className="select select-sm select-accent w-full max-w-xs"
             defaultValue={defaultTheme}
           >
             {daisyUiThemes.map((theme) => (
