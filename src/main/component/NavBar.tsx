@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { themeChange } from 'theme-change'
 
+// todo: import from daisy UI
 const daisyUiThemes = [
   'light',
   'dark',
