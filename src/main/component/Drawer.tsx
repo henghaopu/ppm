@@ -1,33 +1,29 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import * as prismThemes from 'react-syntax-highlighter/dist/esm/styles/prism'
-
-type DrawerProps = {
-  utilFileNames: string[]
-  defaultCodeTheme: keyof typeof prismThemes
-  setCodeTheme: React.Dispatch<React.SetStateAction<keyof typeof prismThemes>>
-}
+import { useTheme } from 'main/context/ThemeContext'
+import { useFile } from 'main/context/FileContext'
+import { RoutingPath } from 'main/AppRoutes'
 
 // todo: support mobile
-function Drawer({
-  utilFileNames,
-  defaultCodeTheme,
-  setCodeTheme,
-}: DrawerProps) {
+function Drawer() {
+  const { codeTheme } = useTheme()
+  const utilFileNames = useFile()
   return (
     <div className="bg-base-200">
       <ul className="menu p-4 overflow-y-auto w-80 text-base-content h-full">
         <li className="menu-title flex flex-row flex-nowrap items-center">
-          <span>Programming Notes</span>
+          <Link to={RoutingPath.ProgrammingNotes}>Programming Notes</Link>
           <select
             className="select select-bordered select-xs w-20 grow m-1"
-            defaultValue={defaultCodeTheme}
+            defaultValue={codeTheme.theme}
             onChange={(e) =>
-              setCodeTheme(e.target.value as keyof typeof prismThemes)
+              codeTheme.setTheme(e.target.value as keyof typeof prismThemes)
             }
           >
-            {Object.keys(prismThemes).map((codeTheme) => (
-              <option key={codeTheme} value={codeTheme}>
-                {codeTheme}
+            {Object.keys(prismThemes).map((prismTheme) => (
+              <option key={prismTheme} value={prismTheme}>
+                {prismTheme}
               </option>
             ))}
           </select>

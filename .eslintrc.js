@@ -57,6 +57,9 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['error'],
     'react/jsx-props-no-spreading': 'off',
     'react/no-unstable-nested-components': ['off', { allowAsProps: true }],
+    // enum with the same name as a component
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'warn',
   },
   // https://github.com/import-js/eslint-plugin-import/issues/1615
   settings: {

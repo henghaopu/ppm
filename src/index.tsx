@@ -3,12 +3,21 @@ import ReactDOM from 'react-dom/client'
 import 'main/index.css'
 import App from 'main/App'
 import reportWebVitals from 'main/reportWebVitals'
+import { BrowserRouter } from 'react-router-dom'
+import { ThemeProvider } from 'main/context/ThemeContext'
+import { FileProvider } from 'main/context/FileContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <FileProvider>
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
+      </FileProvider>
+    </BrowserRouter>
   </React.StrictMode>,
 )
 
