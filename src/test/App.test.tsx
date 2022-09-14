@@ -1,6 +1,6 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
 import App from 'main/App'
+import { render, screen } from './customRender'
 
 beforeEach(() => {
   // Mocking methods which are not implemented in JSDOM. Reference: https://stackoverflow.com/questions/39830580/jest-test-fails-typeerror-window-matchmedia-is-not-a-function
